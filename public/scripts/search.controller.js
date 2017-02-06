@@ -1,7 +1,14 @@
 angular.module("gifApp").controller("SearchController", [
   "GiphyService",
-  function(GiphyService) {
+  "FavoritesService",
+  function(GiphyService, FavoritesService) {
     console.log("loaded gif controller");
+
+    FavoritesService
+      .saveFavorite({ url: "test.com", comment: "does this work?" })
+      .then(function(){
+        console.log('Saved a test favorite');
+      });
 
     var vm = this;
 
@@ -26,5 +33,11 @@ angular.module("gifApp").controller("SearchController", [
         console.log(vm.results);
       });
     };
+
+    this.createFavorite = function(favorite) {
+      FavoritesService.saveFavorite(favorite).then(function(){
+        console.log('Saved a real favorite');
+      })
+    }
   }
 ]);
