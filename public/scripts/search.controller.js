@@ -4,13 +4,18 @@ angular.module("gifApp").controller("SearchController", [
   function(GiphyService, FavoritesService) {
     console.log("loaded gif controller");
 
-    FavoritesService
-      .saveFavorite({ url: "test.com", comment: "does this work?" })
-      .then(function(){
-        console.log('Saved a test favorite');
-      });
-
     var vm = this;
+
+    vm.FavoritesService = FavoritesService;
+    vm.results = [];
+
+    updateFavoriteCount();
+
+    function updateFavoriteCount() {
+      FavoritesService.getFavorites().then(function(favorites){
+        FavoritesService.favoriteCount = favorites.length;
+      })
+    }
 
     this.random = function() {
       GiphyService.random().then(function(gif) {
@@ -37,6 +42,7 @@ angular.module("gifApp").controller("SearchController", [
     this.createFavorite = function(favorite) {
       FavoritesService.saveFavorite(favorite).then(function(){
         console.log('Saved a real favorite');
+        updateFavoriteCount();
       })
     }
   }

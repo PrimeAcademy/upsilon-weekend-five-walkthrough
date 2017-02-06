@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 app.use('/favorites', favorites);
 
-app.use("/", index);
+app.use("/*", index);
 
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function() {

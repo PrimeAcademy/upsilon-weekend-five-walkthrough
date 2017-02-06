@@ -15,3 +15,9 @@ Assumes we already had a working client side app for getting random gifs and sea
   - Connect DOM and controller
     - ng-model on the comment box
     - ng-click on the favorite button
+4. Favorites View
+  - ngRoute installed and configured
+  - favorites.html template
+  - FavoritesController
+5. Favorite Count on Search Page
+  - Method on FavoritesService to get all the favorites
