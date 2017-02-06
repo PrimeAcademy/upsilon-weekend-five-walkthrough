@@ -13,10 +13,16 @@ angular.module("gifApp").controller("SearchController", [
     };
 
     this.search = function() {
-      GiphyService.search(this.q).then(function(gifs) {
+      GiphyService.search(vm.q).then(function(gifs) {
         vm.results = gifs.map(function(gif) {
           return { url: gif.images.fixed_height.url };
         });
+
+        // alternative to map
+        // for (var i = 0; i < gifs.length; i++ ) {
+        //   var gif = gifs[i];
+        //   vm.results.push({ url: gif.images.fixed_height.url })
+        // }
         console.log(vm.results);
       });
     };
